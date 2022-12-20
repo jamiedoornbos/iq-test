@@ -1,6 +1,6 @@
 import "./Board.css"
 import _ from "lodash"
-import classNames from "classnames"
+import Position from "./Position.js"
 
 const ROW_PEGS = {
     0: [4],
@@ -12,25 +12,17 @@ const ROW_PEGS = {
 
 const BOARD = _.flatten(_.map(ROW_PEGS, (columns, row) => _.map(columns, col => [col, parseInt(row)])));
 
-
 const SPACING = 30;
 
 const Board = ({pegs}) => {
-    const filled = {};
     const positionsWithPegs = _.keyBy(pegs);
     return (
         <div className="Board">
             <div className="Board__Grid">
-                {BOARD.map(([x, y], position) => {
-                    const [top, left] = [`${y * SPACING}px`, `${x * SPACING}px`];
-                    const hasPeg = positionsWithPegs[position];
-                    return (
-                        <div className="Position__Wrapper" style={{top, left}}>
-                            <div key={position} className={
-                                classNames("Position", {["Position--withPeg"]: hasPeg})}/>
-                        </div>
-                    );
-                })}
+                {BOARD.map(([x, y], position) => (
+                    <Position key={position} top={y * SPACING} left={x * SPACING}
+                        hasPeg={positionsWithPegs[position]}/>
+                ))}
             </div>
         </div>
     );
