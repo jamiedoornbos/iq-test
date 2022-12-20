@@ -1,0 +1,26 @@
+.Board {
+  background: #BBB;
+  padding: 20px;
+}
+
+.Board__Grid {
+    position: relative;
+    width: 270px;
+    height: 270px;
+}
+
+.Peg__Wrapper {
+    position: absolute;
+}
+
+.Peg {
+    background: red;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    transform: translation(-15px, -15px);
+}
+
+.Peg--Empty {
+    background: black;
+}
