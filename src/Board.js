@@ -1,6 +1,6 @@
 import "./Board.css"
 import _ from "lodash"
-
+import classNames from "classnames"
 
 const ROW_PEGS = {
     0: [4],
@@ -17,17 +17,17 @@ const SPACING = 30;
 
 const Board = ({pegs}) => {
     const filled = {};
-    pegs.forEach((number) => {
-        filled[number] = 1;
-    });
+    const positionsWithPegs = _.keyBy(pegs);
     return (
         <div className="Board">
             <div className="Board__Grid">
-                {BOARD.map(([x, y], hole) => {
+                {BOARD.map(([x, y], position) => {
                     const [top, left] = [`${y * SPACING}px`, `${x * SPACING}px`];
+                    const hasPeg = positionsWithPegs[position];
                     return (
-                        <div className="Peg__Wrapper" style={{top, left}}>
-                            <div key={hole} className={`Peg ${filled[hole] ? "" : "Peg--Empty"}`}/>
+                        <div className="Position__Wrapper" style={{top, left}}>
+                            <div key={position} className={
+                                classNames("Position", {["Position--withPeg"]: hasPeg})}/>
                         </div>
                     );
                 })}

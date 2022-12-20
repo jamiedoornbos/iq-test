@@ -1,26 +1,30 @@
 .Board {
   background: #BBB;
-  padding: 20px;
+  padding: 35px;
 }
 
 .Board__Grid {
     position: relative;
-    width: 270px;
-    height: 270px;
+    width: 240px;
+    height: 240px;
 }
 
-.Peg__Wrapper {
+.Position__Wrapper {
     position: absolute;
 }
 
-.Peg {
-    background: red;
-    width: 30px;
-    height: 30px;
-    border-radius: 15px;
-    transform: translation(-15px, -15px);
+.Position {
+    background: black;
+    border-radius: 10px;
+    width: 20px;
+    height: 20px;
+    transform: translate(-10px, -10px);
 }
 
-.Peg--Empty {
-    background: black;
+.Position--withPeg {
+    background: red;
+    border-radius: 15px;
+    width: 30px;
+    height: 30px;
+    transform: translate(-15px, -15px);
 }
