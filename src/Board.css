@@ -6,8 +6,12 @@
   background: #BBB;
 }
 
-.Board__Instructions, .Board__Status {
+.Board__Instructions {
     font-size: 18px;
+}
+
+.Board__Instructions--flash {
+    color: yellow;
 }
 
 .Board__Grid {

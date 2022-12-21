@@ -1,4 +1,19 @@
 .Game {
   background: #BBB;
+  padding: 25px;
 }
 
+.Game__Status {
+    font-size: 12px;
+    display: none;
+}
+
+.Game__Button {
+    font-size: 16px;
+    visibility: hidden;
+}
+
+.Game__Button--gameOver {
+    font-size: 16px;
+    visibility: visible;
+}

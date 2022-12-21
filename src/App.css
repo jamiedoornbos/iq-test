@@ -13,3 +13,9 @@
   color: white;
 }
 
+.App__Instructions {
+  padding: 5px;
+  color: yellow;
+  font-size: 10px;
+  text-align: left;
+}

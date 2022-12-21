@@ -86,7 +86,16 @@ const useGameState = () => {
         setFilled(filled.map((isFilled, index) => index === position ? false : isFilled));
     };
 
-    const doJump = (jump) => {
+    const doJump = ({from, to, jumped}) => {
+        setFilled(filled.map((isFilled, index) => (
+            (index === from || index === jumped) ? false :
+            index === to ? true :
+            isFilled
+        )));
+    };
+
+    const reset = () => {
+        setFilled(ALL_FILLED);
     };
 
     return {
@@ -97,6 +106,7 @@ const useGameState = () => {
         possibleJumps,
         removePeg,
         doJump,
+        reset,
     }
 };
 
