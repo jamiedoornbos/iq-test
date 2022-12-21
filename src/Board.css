@@ -1,30 +1,17 @@
 .Board {
-  background: #BBB;
   padding: 35px;
+}
+
+.Board__Wrapper {
+  background: #BBB;
+}
+
+.Board__Instructions, .Board__Status {
+    font-size: 18px;
 }
 
 .Board__Grid {
     position: relative;
     width: 240px;
     height: 240px;
-}
-
-.Position__Wrapper {
-    position: absolute;
-}
-
-.Position {
-    background: black;
-    border-radius: 10px;
-    width: 20px;
-    height: 20px;
-    transform: translate(-10px, -10px);
-}
-
-.Position--withPeg {
-    background: red;
-    border-radius: 15px;
-    width: 30px;
-    height: 30px;
-    transform: translate(-15px, -15px);
 }
