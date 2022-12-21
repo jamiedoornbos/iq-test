@@ -107,6 +107,7 @@ const useGameState = () => {
 
     const reset = () => {
         setBoard(randomPegs());
+        setDiscardedPegs([]);
     };
 
     return {

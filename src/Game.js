@@ -18,10 +18,10 @@ const Game = () => {
             </p>
             <p className="Game__Discards">
                 {discardedPegCount ? null : (
-                    <div className={classNames("Game__DiscardPeg", "Game__DiscardPeg--placeholder")}/>
+                    <span className={classNames("Game__DiscardPeg", "Game__DiscardPeg--placeholder")}/>
                 )}
-                {discardedPegs.map((color) => (
-                    <div className={classNames("Game__DiscardPeg", {
+                {discardedPegs.map((color, position) => (
+                    <span key={position} className={classNames("Game__DiscardPeg", {
                         [`Peg--color-${color}`]: Boolean(color)
                     })}/>
                 ))}

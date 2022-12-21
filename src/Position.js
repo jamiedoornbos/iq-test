@@ -18,6 +18,7 @@ const Position = ({index, top, left, peg, onClickPosition, pickedUp, jumpTarget}
             </div> : null}
             <div className="Position__Wrapper" style={position}>
                 <div className={classNames("Position", {
+                    "Position--empty": !peg,
                     "Position--withPeg": Boolean(peg),
                     "Position--jumpTarget": jumpTarget,
                     [`Peg--color-${peg}`]: Boolean(peg),
