@@ -65,21 +65,22 @@ const extrapolate = (from, to) => {
 
 
 const useGameState = () => {
-    const [pegs, setPegs] = useState(randomPegs());
-    const remainingPegs = pegs.filter(Boolean).length;
-    const discardedPegs = pegs.length - remainingPegs;
+    const [board, setBoard] = useState(randomPegs());
+    const [discardedPegs, setDiscardedPegs] = useState([]);
+    const discardedPegCount = discardedPegs.length;
+    const remainingPegCount = board.length - discardedPegCount;
 
     const possibleJumps = [];
     POSITIONS.forEach((_unused, index) => {
-        if (!pegs[index]) {
+        if (!board[index]) {
             return;
         }
         NEIGHBOR_MAP[index].forEach(neighborIndex => {
-            if (!pegs[neighborIndex]) {
+            if (!board[neighborIndex]) {
                 return;
             }
             const to = extrapolate(index, neighborIndex);
-            if (to < 0 || pegs[to]) {
+            if (to < 0 || board[to]) {
                 return;
             }
             possibleJumps.push({from: index, to, jumped: neighborIndex});
@@ -87,26 +88,33 @@ const useGameState = () => {
     });
 
     const removePeg = (position) => {
-        setPegs(pegs.map((color, index) => index === position ? "" : color));
+        if (board[position]) {
+            setBoard(board.map((color, index) => index === position ? "" : color));
+            setDiscardedPegs([...discardedPegs, board[position]]);
+        }
     };
 
     const doJump = ({from, to, jumped}) => {
-        setPegs(pegs.map((color, index) => (
-            (index === from || index === jumped) ? "" :
-            index === to ? pegs[from] :
-            color
-        )));
+        if (board[from] && !board[to] && board[jumped]) {
+            setBoard(board.map((color, index) => (
+                (index === from || index === jumped) ? "" :
+                index === to ? board[from] :
+                color
+            )));
+            setDiscardedPegs([...discardedPegs, board[jumped]]);
+        }
     };
 
     const reset = () => {
-        setPegs(randomPegs());
+        setBoard(randomPegs());
     };
 
     return {
         positions: POSITIONS,
-        pegs,
-        remainingPegs,
+        board,
         discardedPegs,
+        remainingPegCount,
+        discardedPegCount,
         possibleJumps,
         removePeg,
         doJump,

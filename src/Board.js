@@ -5,8 +5,8 @@ import classNames from "classnames"
 
 const SPACING = 30;
 
-const getRating = (pegs) => {
-    switch (pegs) {
+const getRating = (pegCount) => {
+    switch (pegCount) {
         case 1: return "genius"
         case 2: return "pretty clever"
         case 3: return "so-so"
@@ -16,22 +16,22 @@ const getRating = (pegs) => {
 
 const Board = ({
     positions,
-    pegs,
-    remainingPegs,
-    discardedPegs,
+    board,
+    remainingPegCount,
+    discardedPegCount,
     possibleJumps,
     removePeg,
     doJump,
 }) => {
     const [flash, setFlash] = useState("");
     const flashTimeout = useRef(null);
-    const firstMove = discardedPegs === 0;
+    const firstMove = discardedPegCount === 0;
     const gameOver = !firstMove && possibleJumps.length === 0;
     const [selectedPeg, setSelectedPeg] = useState(null);
     const jumpsFromSelected = possibleJumps.filter(({from}) => from === selectedPeg);
     const header = (
         flash ? flash :
-        gameOver ? `Verdict: ${getRating(remainingPegs)}` : 
+        gameOver ? `Verdict: ${getRating(remainingPegCount)}` : 
         firstMove ? "Click a peg to start" : 
         selectedPeg != null ? "Click an empty space to drop" :
         "Click a peg to pick up"
@@ -66,7 +66,7 @@ const Board = ({
             return;
         }
 
-        if (!pegs[index]) {
+        if (!board[index]) {
             setTransientFlash("There's no peg there");
             return;
         }
@@ -92,7 +92,7 @@ const Board = ({
                 <div className="Board__Grid">
                     {positions.map(([x, y], index) => (
                         <Position key={index} index={index} top={y * SPACING} left={x * SPACING}
-                            peg={pegs[index]} onClickPosition={onClickPosition}
+                            peg={board[index]} onClickPosition={onClickPosition}
                             jumpTarget={jumpsFromSelected.find(({to}) => to === index) != null}
                             pickedUp={index === selectedPeg}/>
                     ))}
