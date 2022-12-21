@@ -1,7 +1,7 @@
 import "./Position.css"
 import classNames from "classnames"
 
-const Position = ({index, top, left, hasPegInHole, onClickPosition, pickedUp, jumpTarget}) => {
+const Position = ({index, top, left, peg, onClickPosition, pickedUp, jumpTarget}) => {
     const onClick = (evt) => {
         onClickPosition(index, evt);
     };
@@ -17,7 +17,9 @@ const Position = ({index, top, left, hasPegInHole, onClickPosition, pickedUp, ju
             </div> : null}
             <div className="Position__Wrapper" style={position}>
                 <div className={classNames("Position", {
-                    "Position--withPeg": hasPegInHole,
+                    "Position--withPeg": Boolean(peg),
+                    "Position--jumpTarget": jumpTarget,
+                    [`Position--color-${peg}`]: Boolean(peg),
                 })} onClick={onClick}/>
             </div>
         </>

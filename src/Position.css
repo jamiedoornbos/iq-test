@@ -12,11 +12,14 @@
 }
 
 .Position--withPeg {
-    background: #D33;
     border-radius: 15px;
     width: 30px;
     height: 30px;
     transform: translate(-15px, -15px);
+    cursor: pointer;
+}
+
+.Position--jumpTarget {
     cursor: pointer;
 }
 
@@ -35,4 +38,32 @@
     width: 24px;
     height: 24px;
     transform: translate(-14px, -14px);
+}
+
+.Position--color-red {
+    background-color: red;
+}
+
+.Position--color-green {
+    background-color: green;
+}
+
+.Position--color-yellow {
+    background-color: yellow;
+}
+
+.Position--color-orange {
+    background-color: orange;
+}
+
+.Position--color-blue {
+    background-color: blue;
+}
+
+.Position--color-purple {
+    background-color: purple;
+}
+
+.Position--color-white {
+    background-color: white;
 }

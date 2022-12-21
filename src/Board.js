@@ -16,7 +16,7 @@ const getRating = (pegs) => {
 
 const Board = ({
     positions,
-    filled,
+    pegs,
     remainingPegs,
     discardedPegs,
     possibleJumps,
@@ -51,6 +51,10 @@ const Board = ({
             return;
         }
 
+        if (gameOver) {
+            return;
+        }
+
         if (selectedPeg != null) {
             const jump = jumpsFromSelected.find(({to}) => to === index);
             if (!jump) {
@@ -62,7 +66,7 @@ const Board = ({
             return;
         }
 
-        if (!filled[index]) {
+        if (!pegs[index]) {
             setTransientFlash("There's no peg there");
             return;
         }
@@ -88,7 +92,7 @@ const Board = ({
                 <div className="Board__Grid">
                     {positions.map(([x, y], index) => (
                         <Position key={index} index={index} top={y * SPACING} left={x * SPACING}
-                            hasPegInHole={filled[index]} onClickPosition={onClickPosition}
+                            peg={pegs[index]} onClickPosition={onClickPosition}
                             jumpTarget={jumpsFromSelected.find(({to}) => to === index) != null}
                             pickedUp={index === selectedPeg}/>
                     ))}

@@ -10,12 +10,16 @@ const ROWS = {
     8: [0, 2, 4, 6, 8],
 };
 
+const COLORS = ["red", "green", "yellow", "orange", "blue", "purple", "white"];
+
 // Maps the hole number to it's coordinate in the board, 0..14 -> [x, y]
 const POSITIONS = _.flatten(_.map(
     ROWS, (columns, row) => _.map(columns, col => [col, parseInt(row)])
 ));
 
-const ALL_FILLED = _.fill(Array(POSITIONS.length), true);
+const randomPegs = () => {
+    return POSITIONS.map(() => COLORS[Math.floor(Math.random() * COLORS.length)]);
+};
 
 const ADJACENCY_RADIUS_SQUARED = 2.5 * 2.5;
 
@@ -61,21 +65,21 @@ const extrapolate = (from, to) => {
 
 
 const useGameState = () => {
-    const [filled, setFilled] = useState(ALL_FILLED);
-    const remainingPegs = filled.filter(Boolean).length;
-    const discardedPegs = filled.length - remainingPegs;
+    const [pegs, setPegs] = useState(randomPegs());
+    const remainingPegs = pegs.filter(Boolean).length;
+    const discardedPegs = pegs.length - remainingPegs;
 
     const possibleJumps = [];
     POSITIONS.forEach((_unused, index) => {
-        if (!filled[index]) {
+        if (!pegs[index]) {
             return;
         }
         NEIGHBOR_MAP[index].forEach(neighborIndex => {
-            if (!filled[neighborIndex]) {
+            if (!pegs[neighborIndex]) {
                 return;
             }
             const to = extrapolate(index, neighborIndex);
-            if (to < 0 || filled[to]) {
+            if (to < 0 || pegs[to]) {
                 return;
             }
             possibleJumps.push({from: index, to, jumped: neighborIndex});
@@ -83,24 +87,24 @@ const useGameState = () => {
     });
 
     const removePeg = (position) => {
-        setFilled(filled.map((isFilled, index) => index === position ? false : isFilled));
+        setPegs(pegs.map((color, index) => index === position ? "" : color));
     };
 
     const doJump = ({from, to, jumped}) => {
-        setFilled(filled.map((isFilled, index) => (
-            (index === from || index === jumped) ? false :
-            index === to ? true :
-            isFilled
+        setPegs(pegs.map((color, index) => (
+            (index === from || index === jumped) ? "" :
+            index === to ? pegs[from] :
+            color
         )));
     };
 
     const reset = () => {
-        setFilled(ALL_FILLED);
+        setPegs(randomPegs());
     };
 
     return {
         positions: POSITIONS,
-        filled,
+        pegs,
         remainingPegs,
         discardedPegs,
         possibleJumps,
