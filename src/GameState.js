@@ -10,7 +10,7 @@ const ROWS = {
     8: [0, 2, 4, 6, 8],
 };
 
-const COLORS = ["red", "green", "yellow", "orange", "blue", "purple", "white"];
+const COLORS = ["A", "B", "C", "D", "E", "F"];
 
 // Maps the hole number to it's coordinate in the board, 0..14 -> [x, y]
 const POSITIONS = _.flatten(_.map(

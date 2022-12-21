@@ -1,4 +1,5 @@
 import "./Position.css"
+import "./Peg.css"
 import classNames from "classnames"
 
 const Position = ({index, top, left, peg, onClickPosition, pickedUp, jumpTarget}) => {
@@ -19,7 +20,7 @@ const Position = ({index, top, left, peg, onClickPosition, pickedUp, jumpTarget}
                 <div className={classNames("Position", {
                     "Position--withPeg": Boolean(peg),
                     "Position--jumpTarget": jumpTarget,
-                    [`Position--color-${peg}`]: Boolean(peg),
+                    [`Peg--color-${peg}`]: Boolean(peg),
                 })} onClick={onClick}/>
             </div>
         </>

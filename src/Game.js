@@ -1,4 +1,5 @@
 import "./Game.css"
+import "./Peg.css"
 import useGameState from "./GameState.js"
 import Board from "./Board.js"
 import classNames from "classnames"
@@ -21,7 +22,7 @@ const Game = () => {
                 )}
                 {discardedPegs.map((color) => (
                     <div className={classNames("Game__DiscardPeg", {
-                        [`Game__DiscardPeg--color-${color}`]: Boolean(color)
+                        [`Peg--color-${color}`]: Boolean(color)
                     })}/>
                 ))}
             </p>
